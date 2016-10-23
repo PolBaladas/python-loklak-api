@@ -1,7 +1,10 @@
 ## Python Loklak API
 [![PyPI version](https://badge.fury.io/py/python-loklak-api.svg)](https://badge.fury.io/py/python-loklak-api)
-[![Build Status](https://travis-ci.org/loklak/python-loklak-api.svg?branch=master)](https://travis-ci.org/loklak/python-loklak-api)
-[![Code Health](https://landscape.io/github/loklak/python-loklak-api/master/landscape.svg?style=flat)](https://landscape.io/github/loklak/python-loklak-api/master)
+[![Build Status](https://travis-ci.org/loklak/loklak_python_api.svg?branch=master)](https://travis-ci.org/loklak/loklak_python_api)
+[![Coverage Status](https://coveralls.io/repos/github/loklak/loklak_python_api/badge.svg?branch=master)](https://coveralls.io/github/loklak/loklak_python_api?branch=master)
+[![Code Health](https://landscape.io/github/loklak/loklak_python_api/master/landscape.svg?style=flat)](https://landscape.io/github/loklak/loklak_python_api/master)
+[![Dependency Status](https://gemnasium.com/badges/github.com/loklak/loklak_python_api.svg)](https://gemnasium.com/github.com/loklak/loklak_python_api)
+
 --------------------------------------------
 
 If you want to create an alternative twitter search portal, the only way would be to use the official twitter API to retrieve Tweets. But that interface needs an OAuth account and it makes your search portal completely dependent on Twitters goodwill. The alternative is, to scrape the tweets from the twitter html search result pages, but Twitter may still lock you out on your IP address. To circumvent this, you need many clients accessing twitter to scrape search results. This makes it neccessary to create a distributed peer-to-peer network of twitter scrapers which can all organize, store and index tweets. This solution was created with loklak.
@@ -29,6 +32,17 @@ To use the loklak app, first an object of the loklak type needs to be created. D
 
 `pip install python-loklak-api`
 
+To use the GUI client for API, install `wxPython` from [here](http://www.wxpython.org/download.php) and then install [Gooey](https://github.com/chriskiehl/Gooey) `pip` module. 
+
+`pip install Gooey`
+
+Then add 
+``` 
+from gooey import Gooey
+@Gooey
+```
+before `def main():` in `/bin/loklak` 
+
 Loklak once installed, can be used in the application as
 
 `from loklak import Loklak`
@@ -37,6 +51,13 @@ To create a loklak object you can assign the `Loklak()` object to a variable.
 `variable = Loklak()`
 
 eg. `l = Loklak()`
+This creates an objects whose backend loklak server is `http://loklak.org/`
+
+If you want to set this API to use your own server, you can now define it by doing
+`l = Loklak('http://192.168.192.5:9000/')` for example or pass a URL to it as
+`l = Loklak('http://loklak-super-cluster.mybluemix.net/')
+
+Note the trailing `/` is important and so is `http://`
 
 ### API Documentation
 
@@ -45,28 +66,126 @@ Using the object created above, `l.status()` returns a json of the status as fol
 
 ```json
 {
-  "index_sizes" : {
-    "messages" : 48683271,
-    "users" : 14948939,
-    "queries" : 726,
-    "accounts" : 53,
-    "user" : 5072266,
-    "followers" : 90,
-    "following" : 72
+  "system": {
+    "assigned_memory": 2051014656,
+    "used_memory": 1374976920,
+    "available_memory": 676037736,
+    "cores": 8,
+    "threads": 97,
+    "runtime": 734949,
+    "time_to_restart": 85665051,
+    "load_system_average": 18.19,
+    "load_system_cpu": 0.24344589731081373,
+    "load_process_cpu": 0.018707976134026073,
+    "server_threads": 68
   },
-  "client_info" : {
-    "RemoteHost" : "",
-    "IsLocalhost" : "false",
-    "Accept-Language" : "en-US,en;q=0.5",
-    "Host" : "loklak.org",
-    "Accept-Encoding" : "gzip, deflate",
-    "X-Forwarded-For" : "",
-    "X-Real-IP" : "",
-    "Via" : "1.1 proxy14.nitw (squid/3.1.8)",
-    "User-Agent" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:42.0) Gecko/20100101 Firefox/42.0",
-    "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Connection" : "close",
-    "Cache-Control" : "max-age=259200"
+  "index": {
+    "mps": 176,
+    "messages": {
+      "size": 1195277012,
+      "size_local": 1195277012,
+      "size_backend": 0,
+      "stats": {
+        "name": "messages",
+        "object_cache": {
+          "update": 51188,
+          "hit": 1796,
+          "miss": 139470,
+          "size": 10001,
+          "maxsize": 10000
+        },
+        "exist_cache": {
+          "update": 68419,
+          "hit": 2450,
+          "miss": 137020,
+          "size": 68313,
+          "maxsize": 3000000
+        },
+        "index": {
+          "exist": 68634,
+          "get": 0,
+          "write": 51016
+        }
+      },
+      "queue": {
+        "size": 100000,
+        "maxSize": 100000,
+        "clients": 72
+      }
+    },
+    "users": {
+      "size": 65915082,
+      "size_local": 65915082,
+      "size_backend": 0,
+      "stats": {
+        "name": "users",
+        "object_cache": {
+          "update": 51827,
+          "hit": 3756,
+          "miss": 639,
+          "size": 10000,
+          "maxsize": 10000
+        },
+        "exist_cache": {
+          "update": 56222,
+          "hit": 0,
+          "miss": 0,
+          "size": 15933,
+          "maxsize": 3000000
+        },
+        "index": {
+          "exist": 0,
+          "get": 639,
+          "write": 51016
+        }
+      }
+    },
+    "queries": {
+      "size": 4251,
+      "stats": {
+        "name": "queries",
+        "object_cache": {
+          "update": 452,
+          "hit": 132,
+          "miss": 3297,
+          "size": 160,
+          "maxsize": 10000
+        },
+        "exist_cache": {
+          "update": 3703,
+          "hit": 162,
+          "miss": 2959,
+          "size": 3002,
+          "maxsize": 3000000
+        },
+        "index": {
+          "exist": 2959,
+          "get": 176,
+          "write": 292
+        }
+      }
+    },
+    "accounts": {"size": 96},
+    "user": {"size": 790137},
+    "followers": {"size": 146},
+    "following": {"size": 135}
+  },
+  "client_info": {
+    "RemoteHost": "103.43.112.99",
+    "IsLocalhost": "false",
+    "request_header": {
+      "Cookie": "__utma=156806566.949140694.1455798901.1455798901.1455798901.1; __utmc=156806566; __utmz=156806566.1455798901.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Upgrade-Insecure-Requests": "1",
+      "X-Forwarded-Proto": "http",
+      "Connection": "close",
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36",
+      "X-Forwarded-For": "103.43.112.99",
+      "Host": "loklak.org",
+      "Accept-Encoding": "gzip, deflate, sdch",
+      "Accept-Language": "en-US,en;q=0.8",
+      "X-Real-IP": "103.43.112.99"
+    }
   }
 }
 ```
@@ -120,7 +239,7 @@ To update the user details within the server, package a `json` object with the f
 
 Public search API for the scraped tweets from Twitter.
 
-Query structure: `search('querycontent','since date','until date', 'from a specific user')`
+Query structure: `search('querycontent','since date','until date', 'from a specific user', '# of tweets')`
 
 eg. l.search('doctor who')
 
@@ -128,10 +247,19 @@ A search result in json looks as follows.
 ```json
 {
   "search_metadata" : {
-    "startIndex" : "0",
     "itemsPerPage" : "100",
-    "count" : "120",
-    "query" : "doctor who"
+    "count" : "100",
+    "count_twitter_all" : 0,
+    "count_twitter_new" : 100,
+    "count_backend" : 0,
+    "count_cache" : 97969,
+    "hits" : 97969,
+    "period" : 18422,
+    "query" : "doctor who",
+    "client" : "103.43.112.99",
+    "time" : 4834,
+    "servicereduction" : "false",
+    "scraperInfo" : "http://kaskelix.de:9000,local"
   },
   "statuses" : [ {
     "created_at" : "2015-03-03T19:30:43.000Z",
@@ -172,57 +300,66 @@ eg. `l.search('sudheesh001', '2015-01-10', '2015-01-21')`
 
 Which results in a json as follows
 ```json
-{'search_metadata': {'client': '14.139.85.200',
-                      'count': '3',
-                      'count_backend': 0,
-                      'count_cache': 3,
-                      'count_twitter_all': 0,
-                      'count_twitter_new': 0,
-                      'hits': 3,
-                      'itemsPerPage': '100',
-                      'period': 103487501,
-                      'query': 'sudheesh001 since:2015-01-10 until:2015-01-21',
-                      'servicereduction': 'false',
-                      'time': 2001},
- 'statuses': [{'audio': [],
-                'audio_count': 0,
-                'classifier_language': 'english',
-                'classifier_language_probability': 0.00043833465,
-                'created_at': '2015-01-19T04:25:38.000Z',
-                'favourites_count': 0,
-                'hashtags': [],
-                'hashtags_count': 0,
-                'hosts': [],
-                'hosts_count': 0,
-                'id_str': '557031100065648640',
-                'images': [],
-                'images_count': 0,
-                'link': 'https://twitter.com/sudheesh001/status/557031100065648640',
-                'links': [],
-                'links_count': 0,
-                'mentions': ['imasaikiran', 'sudheesh001'],
-                'mentions_count': 2,
-                'place_context': 'ABOUT',
-                'place_id': '',
-                'place_name': '',
-                'provider_hash': '1cadbfd3',
-                'provider_type': 'REMOTE',
-                'retweet_count': 0,
-                'screen_name': 'sudheesh001',
-                'source_type': 'TWITTER',
-                'text': '@imasaikiran @sudheesh001 done !! \U0001f60a',
-                'user': {'appearance_first': '2015-11-13T02:05:19.861Z',
-                          'appearance_latest': '2015-11-13T02:05:19.861Z',
-                          'name': 'SudheeshSinganamalla',
-                          'profile_image_url_https': 'https://pbs.twimg.com/profile_images/500559201542762498/IvDEqWy1_bigger.jpeg',
-                          'screen_name': 'sudheesh001',
-                          'user_id': '390171807'},
-                'videos': [],
-                'videos_count': 0,
-                'without_l_len': 36,
-                'without_lu_len': 10,
-                'without_luh_len': 10}
-            ]}
+{
+ "search_metadata" : {
+    "itemsPerPage" : "100",
+    "count" : "100",
+    "count_twitter_all" : 0,
+    "count_twitter_new" : 100,
+    "count_backend" : 0,
+    "count_cache" : 97969,
+    "hits" : 97969,
+    "period" : 18422,
+    "query" : "doctor who",
+    "client" : "103.43.112.99",
+    "time" : 4834,
+    "servicereduction" : "false",
+    "scraperInfo" : "http://kaskelix.de:9000,local"
+  },
+  "statuses" : [ {
+    "timestamp" : "2016-05-11T16:53:46.615Z",
+    "created_at" : "2016-05-11T16:52:59.000Z",
+    "screen_name" : "BelleRinger1",
+    "text" : "I would love to see http://www.cultbox.co.uk/?p=53662",
+    "link" : "https://twitter.com/BelleRinger1/status/730440578031190016",
+    "id_str" : "730440578031190016",
+    "source_type" : "TWITTER",
+    "provider_type" : "SCRAPED",
+    "retweet_count" : 0,
+    "favourites_count" : 0,
+    "images" : [ ],
+    "images_count" : 0,
+    "audio" : [ ],
+    "audio_count" : 0,
+    "videos" : [ ],
+    "videos_count" : 0,
+    "place_name" : "",
+    "place_id" : "",
+    "place_context" : "ABOUT",
+    "hosts" : [ "www.cultbox.co.uk" ],
+    "hosts_count" : 1,
+    "links" : [ "http://www.cultbox.co.uk/?p=53662" ],
+    "links_count" : 1,
+    "mentions" : [ ],
+    "mentions_count" : 0,
+    "hashtags" : [ ],
+    "hashtags_count" : 0,
+    "classifier_language" : "english",
+    "classifier_language_probability" : 6.95489E-8,
+    "without_l_len" : 19,
+    "without_lu_len" : 19,
+    "without_luh_len" : 19,
+    "user" : {
+      "screen_name" : "BelleRinger1",
+      "user_id" : "2497345790",
+      "name" : "Belle Gaudreau",
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/723262970805907456/RbMnyEqs_bigger.jpg",
+      "appearance_first" : "2016-05-11T16:53:46.615Z",
+      "appearance_latest" : "2016-05-11T16:53:46.615Z"
+    }
+  }, ...
+  ]
+}
 ```
 
 Valid parameters for `since` and `until` can also be `None` or any `YMD` date format. Looking towards the future releases to resolve this to any date format.
@@ -230,6 +367,10 @@ Valid parameters for `since` and `until` can also be `None` or any `YMD` date fo
 The `from a specific user` parameter makes sure that the results obtained for the given query are only from a specific user.
 
 `l.search('doctor who', '2015-01-10', '2015-01-21','0rb1t3r')`
+
+The `# of tweets` parameter is how many tweets will be returned.
+
+`l.search('avengers', None, None, 'Iron_Man', 3)`
 
 ##### Aggregations API
 

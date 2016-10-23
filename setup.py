@@ -1,16 +1,15 @@
-import re, uuid
-
+"""The module that setup loklak python API."""
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
 setup(name='python-loklak-api',
-	  version='1.0',
-	  description="Python API for loklak, Anonymous distributed P2P Systems.",
+      version='1.7',
+      description="Python API for loklak, Anonymous distributed P2P Systems.",
       author='Sudheesh Singanamalla',
       author_email='sudheesh95@gmail.com',
-      url='https://github.com/sudheesh001/python-loklak-api',
+      url='https://github.com/loklak/loklak_api_python',
       license='',
       platforms='Linux/Mac',
       py_modules=['loklak'],
@@ -23,12 +22,11 @@ setup(name='python-loklak-api',
           'Topic :: Internet',
           ],
       keywords="Twitter Loklak Anonymous API",
-      install_requires = [
-        "asyncoro==3.5",
+      install_requires=[
         "requests==2.8.1",
-        "wsgiref==0.1.2"
+        "xmljson==0.1.6"
       ],
       zip_safe=False,
-      download_url = 'https://github.com/sudheesh001/python-loklak-api',
+      download_url='https://github.com/loklak/loklak_api_python',
       scripts=['bin/loklak']
       )

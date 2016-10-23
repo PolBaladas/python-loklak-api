@@ -1,3 +1,4 @@
+"""This module contains an example on using every function in loklak.py and print the result in the console."""
 import tempfile
 from loklak import Loklak
 from pprint import pprint
@@ -23,6 +24,10 @@ pprint(status)
 
 hello = l.hello()
 pprint(hello)
+
+# Loklak Susi API
+susi = l.susi('Hi I am Sudheesh')
+pprint(susi)
 
 # Loklak Peers API
 
@@ -102,6 +107,20 @@ pprint(search5)
 
 search6 = l.search('sudheesh001', '2015-01-10', '2015-01-21','sudheesh001')
 pprint(search6)
+
+search7 = l.search('gunvirranu', None, None, None, 6)
+pprint(search7)
+
+###loklak Suggestion API
+suggestion1 = l.suggest()
+pprint(suggest1)
+
+suggestion2 = l.suggest(count=20, order='desc')
+pprint(suggestion2)
+
+
+suggestion3 = l.suggest(count=10, order='asc')
+pprint(suggestion3)
 
 ###  account
 account1 = l.account('name')
